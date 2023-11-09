@@ -136,10 +136,10 @@ class Plugin
 		$this->Helper = new Helper\Helper();
 		$this->WP = new \SimplePopup\WordPress\Helper\Helper();
 		/** Init Config */
-		$this->config->path = explode('/', dirname(__DIR__, 1));
+		$this->config->path = explode(DIRECTORY_SEPARATOR, dirname(__DIR__, 1));
 		$this->config->path =
-			implode('/', $this->config->path) .
-			'/' .
+			implode(DIRECTORY_SEPARATOR, $this->config->path) .
+			DIRECTORY_SEPARATOR .
 			end($this->config->path) .
 			'.php';
 		$this->config->options = $this->WP->get_option('simplepopup_config');
@@ -199,6 +199,7 @@ class Plugin
 		$models = $this->Helper->getDirFiles(
 			$this->path['framework_path'] . 'src/Model'
 		);
+
 		$allow = ['.', '..', '.DS_Store', 'index.php'];
 		foreach ($models as $model) {
 			if (in_array(basename($model), $allow)) {
@@ -315,6 +316,7 @@ class Plugin
 		$controllers = $this->Helper->getDirFiles(
 			$this->path['framework_path'] . 'src/' . $dir
 		);
+
 		$allow = ['.', '..', '.DS_Store', 'index.php'];
 		foreach ($controllers as $controller) {
 			if (in_array(basename($controller), $allow)) {
@@ -642,6 +644,7 @@ class Plugin
 			'upload_dir' => wp_upload_dir(),
 			'ajax_url' => get_home_url() . '/wp-admin/admin-ajax.php',
 		];
+
 		$path['view_path'] = $path['framework_path'] . 'src/View/';
 		return $path;
 	}

@@ -38,6 +38,7 @@ class BackendPage extends Controller
 		$action->setComponent($this);
 		$action->setHook('admin_menu');
 		$action->setCallback('page_setting');
+
 		$action->setMandatory(true);
 		$action->setPremium(false);
 		$action->setDescription(

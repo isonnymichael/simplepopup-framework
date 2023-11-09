@@ -1,0 +1,115 @@
+Arguments: 
+  D:\Codes\env\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\laragon\bin\php\php-8.2.11-nts-Win32-vs16-x64;C:\Python311\Scripts\;C:\Python311\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;D:\Codes\env\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\laragon\bin\php\php-8.2.11-nts-Win32-vs16-x64;C:\ProgramData\ComposerSetup\bin;D:\Codes\env\bin;D:\Codes\env\nvm;D:\Codes\env\nodejs;D:\Codes\env\aspri;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Roaming\npm;C:\Users\USER\.dotnet\tools;C:\Users\USER\AppData\Roaming\Composer\vendor\bin;C:\Users\USER\go\bin;D:\Codes\env\nvm;D:\Codes\env\nodejs;D:\Codes\env\PhpStorm 2023.2.3\bin;;D:\Codes\env\DataGrip 2023.2.3\bin;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.19.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Users\USER\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141517:19)
+      at Object.onceWrapper (node:events:627:28)
+      at ClientRequest.emit (node:events:513:28)
+      at TLSSocket.emitRequestTimeout (node:_http_client:839:9)
+      at Object.onceWrapper (node:events:627:28)
+      at TLSSocket.emit (node:events:525:35)
+      at TLSSocket.Socket._onTimeout (node:net:550:8)
+      at listOnTimeout (node:internal/timers:559:17)
+      at processTimers (node:internal/timers:502:7)
+
+npm manifest: 
+  {
+    "name": "simplepopup-framework",
+    "version": "0.5.2",
+    "description": "Just another WordPress Plugin and Theme boilerplate with TailwindCSS, SASS, Blocks, ESLint, Prettier, and more.",
+    "scripts": {
+      "build": "grunt run build",
+      "build:wp": "wp-scripts build",
+      "watch:wp": "wp-scripts start",
+      "release": "simplepopupenv release-it --",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/isonnymichael/simplepopup-framework.git"
+    },
+    "author": "Agung Sundoro",
+    "license": "LGPL-3.0",
+    "bugs": {
+      "url": "https://github.com/isonnymichael/simplepopup-framework/issues"
+    },
+    "homepage": "https://github.com/isonnymichael/simplepopup-framework#readme",
+    "devDependencies": {
+      "@babel/eslint-parser": "^7.19.1",
+      "@commitlint/cli": "^17.3.0",
+      "@commitlint/config-conventional": "^17.3.0",
+      "@prettier/plugin-php": "^0.19.2",
+      "@release-it/bumper": "^4.0.0",
+      "@release-it/conventional-changelog": "^5.1.1",
+      "@types/react": "^18.0.26",
+      "@types/react-dom": "^18.0.9",
+      "@vitejs/plugin-react": "^3.0.0",
+      "@wordpress/block-library": "^8.0.0",
+      "@wordpress/blocks": "^12.0.0",
+      "@wordpress/components": "^23.0.0",
+      "@wordpress/scripts": "^25.0.0",
+      "autoprefixer": "^10.2.6",
+      "eslint": "^8.30.0",
+      "eslint-plugin-svelte3": "^4.0.0",
+      "grunt": "^1.4.1",
+      "grunt-contrib-cssmin": "^4.0.0",
+      "grunt-contrib-uglify": "^5.0.1",
+      "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
+      "grunt-contrib-watch": "^1.1.0",
+      "grunt-shell": "^3.0.1",
+      "husky": "^8.0.2",
+      "node-sass": "^7.0.3",
+      "prettier": "^2.8.1",
+      "prettier-plugin-svelte": "^2.9.0",
+      "release-it": "^15.5.1",
+      "@rollup/plugin-commonjs": "^24.0.0",
+      "@rollup/plugin-node-resolve": "^15.0.0",
+      "@rollup/plugin-terser": "^0.1.0",
+      "rollup": "^2.3.4",
+      "rollup-plugin-css-only": "^3.1.0",
+      "rollup-plugin-livereload": "^2.0.0",
+      "rollup-plugin-svelte": "^7.0.0",
+      "sass": "1.57.0",
+      "shelljs": "^0.8.5",
+      "tailwindcss": "^2.1.2",
+      "ts-loader": "^9.2.6",
+      "tslib": "^2.0.0",
+      "svelte": "^3.55.0",
+      "typescript": "^4.5.4",
+      "vite": "^4.0.0",
+      "webpack": "^5.69.1",
+      "webpack-cli": "^4.9.2"
+    },
+    "lint-staged": {
+      "assets/components/**/*.{js,svelte}": [
+        "eslint --fix",
+        "prettier --write"
+      ],
+      "assets/js/**/*.{js,ts}": [
+        "eslint --fix",
+        "prettier --write"
+      ],
+      "assets/css/**/*.{css,scss}": "npx prettier --write",
+      "src/**/*.php": "prettier --write",
+      "src/template-parts/**/*.php": "prettier --write"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,7 +1,7 @@
 {
   "name": "SimplePopup",
   "version": "0.5.2",
-  "production": true,
+  "production": false,
   "premium": false,
   "description": "SimplePopup Framework",
   "enableHooks": [
