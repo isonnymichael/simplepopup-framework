@@ -1,0 +1,46 @@
+{
+  "name": "SimplePopup",
+  "version": "0.5.2",
+  "production": true,
+  "premium": false,
+  "description": "SimplePopup Framework",
+  "enableHooks": [
+    "action",
+    "filter",
+    "shortcode"
+  ],
+  "default": {
+    "simplepopup_animation": {
+      "enable": 1,
+      "elements": {
+        "logo": "bounceIn",
+        "tab": "heartBeat",
+        "content": "fadeIn",
+        "simplepopup_active": "fadeIn",
+        "simplepopup_inactive": "fadeOut"
+      }
+    },
+    "simplepopup_assets": {
+      "backend": {
+        "simplepopup-fontawesome-css": {
+          "status": true,
+          "type": "css",
+          "src": "vendor/fontawesome/css/all.min.css"
+        }
+      },
+      "frontend": {
+        "simplepopup-chart-js": {
+          "status": true,
+          "type": "js",
+          "src": "vendor/chartjs/chart.js"
+        },
+        "simplepopup-fontawesome-css": {
+          "status": true,
+          "type": "css",
+          "src": "vendor/fontawesome/css/all.min.css"
+        }
+      }
+    },
+    "simplepopup_hooks": []
+  }
+}

@@ -1,0 +1,19 @@
+# IDE
+/.idea
+/.vscode
+
+# Library
+/node_modules
+/vendor
+
+# Extras
+/docs/.obsidian
+.env
+sniffer.txt
+
+# OS
+*.DS_Store
+.DS_Store
+
+# Builds
+/assets/build
