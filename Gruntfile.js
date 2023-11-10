@@ -6,6 +6,7 @@ let blockConfig = require( path.resolve(__dirname, 'blocks/blocks.json') );
 
 /** Export Module */
 module.exports = function (grunt) {
+
 	/** Configuration */
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -85,6 +86,7 @@ module.exports = function (grunt) {
 					let assets = {};
 					scriptConfig.map(s => {
 						let path = `${s.output.path}/${s.output.filename}`;
+						console.log(path);
 						assets[path] = [path];
 					});
 					return assets;

@@ -59,7 +59,6 @@ class BackendPage extends Controller
 		// Sections.
 		$sections = [];
 		$sections['Backend.about'] = ['name' => 'About', 'active' => true];
-
 		// Set View.
 		$view = new View($this->Framework);
 		$view->setTemplate('backend.default');
