@@ -196,6 +196,7 @@ class Plugin
 	 */
 	public function loadModels()
 	{
+
 		$models = $this->Helper->getDirFiles(
 			$this->path['framework_path'] . 'src/Model'
 		);
@@ -323,7 +324,17 @@ class Plugin
 				continue;
 			}
 			$name = basename($controller, '.php');
-			$controller = '\\SimplePopup\\' . ucwords($dir) . '\\' . $name;
+
+			// Modified to get dynamic namespace level
+			// Because psr-4 failed to generate auto class (ex:Metabox)
+			// TODO: Must more dynamic (how if inside folder have folder again?)
+			$_dir = basename(dirname($controller));
+			if($_dir == 'Controller'){
+				$controller = '\\SimplePopup\\' . ucwords($dir) . '\\' . $name;
+			}else{
+				$controller = '\\SimplePopup\\' . ucwords($dir) . '\\' . ucwords($_dir) . '\\' . $name;
+			}
+
 			$controller = new $controller($this);
 			if ($dir === 'Controller') {
 				$this->controllers[$name] = $controller;
@@ -631,9 +642,11 @@ class Plugin
 	 */
 	public function generatePath($path)
 	{
+
 		if (!function_exists('get_home_path')) {
 			include_once ABSPATH . '/wp-admin/includes/file.php';
 		}
+
 		$path = [
 			'path' => $path,
 			'home_path' => get_home_path(),

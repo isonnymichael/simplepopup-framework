@@ -22,14 +22,14 @@ class Controller
 	 * Admin constructor
 	 *
 	 * @return void
-	 * @param    object $framework     Framework configuration
+	 * @param    object $plugin     Framework configuration
 	 * @pattern prototype
 	 */
-	public function __construct($framework)
+	public function __construct(\SimplePopup\Plugin $plugin)
 	{
-		$this->Framework = $framework;
-		$this->Helper = $framework->getHelper();
-		$this->WP = $framework->getWP();
+		$this->Framework = $plugin;
+		$this->Helper = $plugin->getHelper();
+		$this->WP = $plugin->getWP();
 		$this->hooks = [];
 	}
 

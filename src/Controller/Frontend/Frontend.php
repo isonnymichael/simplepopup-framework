@@ -1,12 +1,12 @@
 <?php
 
-namespace SimplePopup\Controller;
+namespace SimplePopup\Controller\Frontend;
 
 ! defined( 'WPINC ' ) or die();
 
 // Plugin class import.
-use SimplePopup\View;
 use SimplePopup\Controller;
+use SimplePopup\View;
 use SimplePopup\WordPress\Hook\Action;
 
 /**

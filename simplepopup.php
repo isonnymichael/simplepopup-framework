@@ -1,19 +1,19 @@
 <?php
 /*
- * Plugin Name:       SimplePopup
- * Plugin URI:        https://github.com/artistudioxyz/simplepopup-framework
- * Description:       Just another WordPress Plugin and Theme boilerplate with TailwindCSS, SASS, Blocks, ESLint, Prettier, and more.
+ * Plugin Name:       Simple Popup
+ * Plugin URI:        https://example.com/plugins/the-basics/
+ * Description:       A simple lightweight popup, fast, and powerful
  * Version:           0.0.1
- * Author:            Agung Sundoro
- * Author URI:        https://agung2001.github.io
- * License:           GPL-3.0
- * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
- *
- * SOFTWARE LICENSE INFORMATION
- *
- * For detailed information regards to the licensing of
- * this software, please review the license.txt
-*/
+ * Requires at least: 6.4
+ * Requires PHP:      7.4
+ * Author:            Sonny Michael
+ * Author URI:        https://author.example.com/
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI:        https://example.com/my-plugin/
+ * Text Domain:       simple-popup-plugin
+ * Domain Path:       /languages
+ */
 
 ! defined( 'WPINC ' ) || die;
 

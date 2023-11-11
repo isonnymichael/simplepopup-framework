@@ -12,6 +12,11 @@ namespace SimplePopup\WordPress\Helper;
  */
 trait Asset
 {
+	/*** Localize a script */
+	public function wp_localize_script( string $handle, string $object_name, array $l10n ) {
+		wp_localize_script( $handle, $object_name, $l10n );
+	}
+	
 	/**
 	 * WordPress enqueue style
 	 *

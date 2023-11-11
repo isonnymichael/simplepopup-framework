@@ -266,4 +266,5 @@ class View
 			require $view_path;
 		}
 	}
+
 }

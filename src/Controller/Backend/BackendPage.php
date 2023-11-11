@@ -1,6 +1,6 @@
 <?php
 
-namespace SimplePopup\Controller;
+namespace SimplePopup\Controller\Backend;
 
 !defined('WPINC ') or die();
 
