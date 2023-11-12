@@ -85,6 +85,9 @@ class Backend extends Controller
 				'vendor/animatecss/animate.min.css'
 			);
 
+			// Load var local data
+			$this->WP->wp_enqueue_script( 'simplepopup-local', 'local/simplepopup.js', array(), '', true );
+
 			// Load Plugin Assets.
 			$this->WP->wp_enqueue_style('simplepopup', 'build/css/backend.min.css');
 			$this->WP->wp_enqueue_script(
@@ -94,6 +97,8 @@ class Backend extends Controller
 				'',
 				true
 			);
+
+
 		}
 
 	}

@@ -2,13 +2,9 @@
 /**
  * Metabox Design
  *
- * @package FAB
+ * @package SIMPLEPOPUP
  */
 ?>
 
-<div id="fab-metabox-design-content"></div>
-<script type="text/javascript">
-    jQuery(function($) {
-        window.FAB_METABOX_DESIGN.init();
-    });
-</script>
+<div id="simplepopup-metabox-design-content"></div>
+<script type="text/javascript"></script>

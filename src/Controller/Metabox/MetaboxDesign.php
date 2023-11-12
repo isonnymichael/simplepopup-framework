@@ -54,6 +54,7 @@ class MetaboxDesign extends Base {
         $this->hooks[] = $action;
     }
 
+
     /**
      * Eneque scripts @backend
      *
@@ -64,34 +65,42 @@ class MetaboxDesign extends Base {
         /** Grab Data */
         global $post;
 
-//        $screen = $this->WP->getScreen();
-//        $allowedPage = ['post.php', 'post-new.php'];
-//        if ( !isset( $post->post_type ) || $post->post_type !== 'simplepopup' || !in_array($screen->pagenow, $allowedPage) ) {
-//            return;
-//        }
+        $screen = $this->WP->getScreen();
+        $allowedPage = ['post.php', 'post-new.php'];
+        if ( !isset( $post->post_type ) || $post->post_type !== 'simplepopup' || !in_array($screen->pagenow, $allowedPage) ) {
+            return;
+        }
         /** Grab Data */
-//        $simplepopup = new SimplePopupItem( $post->ID );
-//        $simplepopup = $simplepopup->getVars();
+        $simplepopup = new SimplePopupItem( $post->ID );
+        $simplepopup = $simplepopup->getVars();
 
         /** Add Inline Script */
-//        $this->WP->wp_localize_script( 'simplepopup-local', 'SIMPLEPOPUP_METABOX_DESIGN', array(
-//            'defaultOptions' => [
-//                'size' => array( 'type' => Design::$size['type'] ),
-//                'theme' => Modal::$theme,
-//                'layout' => Modal::$layout,
-//                'template' => Design::$template,
-//            ],
-//            'data' => compact('simplepopup')
-//        ));
+        $this->WP->wp_localize_script( 'simplepopup-local', 'SIMPLEPOPUP_METABOX_DESIGN', array(
+            'defaultOptions' => [
+                'size' => array( 'type' => Design::$size['type'] )
+            ],
+            'data' => compact('simplepopup')
+        ));
 
+		// TODO:: Change to local, I use CDN because I don't understand to setup and build react component with local component
         /** Enqueue */
-//        $this->WP->wp_enqueue_script( 'simplepopup-design', 'build/js/backend/metabox-design.min.js', array(), '', true );
-//
-//        /** Load Component */
-//        $component = 'metabox-design';
-//        $this->WP->wp_enqueue_style( sprintf('%s-component', $component), sprintf('build/components/%s/bundle.css', $component) );
-//        $this->WP->wp_enqueue_script(sprintf('%s-component', $component), sprintf('build/components/%s/bundle.js', $component), array(), '1.0', true);
-    }
+        $this->WP->wp_enqueue_script( 'simplepopup-design-react', 'https://unpkg.com/react@17/umd/react.development.js', array(), '', true );
+	    $this->WP->wp_enqueue_script( 'simplepopup-design-react-dom', 'https://unpkg.com/react-dom@17/umd/react-dom.development.js', array(), '', true );
+	    $this->WP->wp_enqueue_script( 'simplepopup-design-babel', 'https://unpkg.com/@babel/standalone/babel.min.js', array(), '', true );
+        /** Load Component */
+        $component = 'metabox-design';
+        $this->WP->wp_enqueue_style( sprintf('%s-component', $component), sprintf('build/components/%s/bundle.css', $component) );
+        $this->WP->wp_enqueue_script(sprintf('%s-component', $component), sprintf('build/components/%s/bundle.js', $component), array(), '1.0', true);
+		// Change type script babel
+	    add_filter("script_loader_tag", function($tag, $handle, $src){
+		    if ("metabox-design-component" === $handle) {
+			    $tag = '<script type="text/babel" src="' . esc_url($src) . '"></script>';
+		    }
+		    return $tag;
+	    }, 10, 3);
+
+	}
+
 
     /**
      * Register metabox designs on custom post type SimplePopup
@@ -102,7 +111,7 @@ class MetaboxDesign extends Base {
         $metabox = new MetaBox();
         $metabox->setScreen( 'simplepopup' );
         $metabox->setId( 'simplepopup-metabox-design' );
-        $metabox->setTitle( 'Design' );
+        $metabox->setTitle( $this->Framework->getName().' Settings' );
         $metabox->setCallback( array( $this, 'metabox_design_callback' ) );
         $metabox->setCallbackArgs( array( 'is_display' => false ) );
         $metabox->build();
