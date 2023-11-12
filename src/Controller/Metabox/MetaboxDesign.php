@@ -49,7 +49,7 @@ class MetaboxDesign extends Base {
         $action->setCallback( 'metabox_design' );
         $action->setMandatory( false );
         $action->setDescription( 'Add Design metabox to SimplePopup CPT' );
-//        $action->setFeature( $plugin->getFeatures()['core_backend'] );
+        $action->setFeature( $plugin->getFeatures()['core_backend'] );
         $action->setPremium( false );
         $this->hooks[] = $action;
     }
@@ -63,33 +63,34 @@ class MetaboxDesign extends Base {
     public function backend_enequeue_metabox_design( $hook_suffix ) {
         /** Grab Data */
         global $post;
-        $screen = $this->WP->getScreen();
-        $allowedPage = ['post.php', 'post-new.php'];
-        if ( !isset( $post->post_type ) || $post->post_type !== 'simplepopup' || !in_array($screen->pagenow, $allowedPage) ) {
-            return;
-        }
+
+//        $screen = $this->WP->getScreen();
+//        $allowedPage = ['post.php', 'post-new.php'];
+//        if ( !isset( $post->post_type ) || $post->post_type !== 'simplepopup' || !in_array($screen->pagenow, $allowedPage) ) {
+//            return;
+//        }
         /** Grab Data */
-        $simplepopup = new SimplePopupItem( $post->ID );
-        $simplepopup = $simplepopup->getVars();
+//        $simplepopup = new SimplePopupItem( $post->ID );
+//        $simplepopup = $simplepopup->getVars();
 
         /** Add Inline Script */
-        $this->WP->wp_localize_script( 'simplepopup-local', 'FAB_METABOX_DESIGN', array(
-            'defaultOptions' => [
-                'size' => array( 'type' => Design::$size['type'] ),
-                'theme' => Modal::$theme,
-                'layout' => Modal::$layout,
-                'template' => Design::$template,
-            ],
-            'data' => compact('simplepopup')
-        ));
+//        $this->WP->wp_localize_script( 'simplepopup-local', 'SIMPLEPOPUP_METABOX_DESIGN', array(
+//            'defaultOptions' => [
+//                'size' => array( 'type' => Design::$size['type'] ),
+//                'theme' => Modal::$theme,
+//                'layout' => Modal::$layout,
+//                'template' => Design::$template,
+//            ],
+//            'data' => compact('simplepopup')
+//        ));
 
         /** Enqueue */
-        $this->WP->wp_enqueue_script( 'simplepopup-design', 'build/js/backend/metabox-design.min.js', array(), '', true );
-
-        /** Load Component */
-        $component = 'metabox-design';
-        $this->WP->wp_enqueue_style( sprintf('%s-component', $component), sprintf('build/components/%s/bundle.css', $component) );
-        $this->WP->wp_enqueue_script(sprintf('%s-component', $component), sprintf('build/components/%s/bundle.js', $component), array(), '1.0', true);
+//        $this->WP->wp_enqueue_script( 'simplepopup-design', 'build/js/backend/metabox-design.min.js', array(), '', true );
+//
+//        /** Load Component */
+//        $component = 'metabox-design';
+//        $this->WP->wp_enqueue_style( sprintf('%s-component', $component), sprintf('build/components/%s/bundle.css', $component) );
+//        $this->WP->wp_enqueue_script(sprintf('%s-component', $component), sprintf('build/components/%s/bundle.js', $component), array(), '1.0', true);
     }
 
     /**

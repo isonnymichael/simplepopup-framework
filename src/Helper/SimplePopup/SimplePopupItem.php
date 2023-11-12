@@ -13,16 +13,6 @@ namespace SimplePopup\Helper\SimplePopup;
  * @subpackage SimplePopup/Controller
  */
 
-use Fab\Metabox\FABMetaboxLocation;
-use Fab\Metabox\FABMetaboxSetting;
-use Fab\Metabox\FABMetaboxDesign;
-use Fab\Metabox\FABMetaboxTrigger;
-use Fab\Module\FABModuleAuthLogin;
-use Fab\Module\FABModuleAuthLogout;
-use Fab\Module\FABModuleReadingBar;
-use Fab\Module\FABModuleScrollToTop;
-use Fab\Module\FABModuleAnchorLink;
-use Fab\Module\FABModuleSearch;
 use SimplePopup\Helper\SimplePopupMetabox\SimplePopupMetaboxDesign;
 use SimplePopup\Helper\SimplePopupMetabox\SimplePopupMetaboxSetting;
 use SimplePopup\View;
@@ -109,13 +99,7 @@ class SimplePopupItem {
 
 	/**
 	 * @access   protected
-	 * @var      FABModal $modal modal
-	 */
-	protected $modal;
-
-	/**
-	 * @access   protected
-	 * @var      FABModule $module module
+	 * @var      SimplePopupModule $module module
 	 */
 	protected $module;
 
@@ -179,7 +163,6 @@ class SimplePopupItem {
 		$this->title           = get_post_field( 'post_title', $this->ID );
 		$this->slug            = get_post_field( 'post_name', $this->ID );
 		$this->status          = get_post_field( 'post_status', $this->ID );
-		$this->modal           = new SimplePopupModal( $this->ID );
 		$this->icon_class      = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['icon_class']['meta_key'], true );
 		$this->icon_class      = $this->getIconClass();
 		$this->type            = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxSetting::$post_metas['type']['meta_key'], true );
@@ -199,72 +182,60 @@ class SimplePopupItem {
 
 	/** Grab Module */
 	public function construct_grabModule() {
-		if ( 'anchor_link' === $this->type ) {
-			$this->module = new FABModuleAnchorLink();
-		} elseif ( 'auth_login' === $this->type ) {
-			$this->module = new FABModuleAuthLogin();
-		} elseif ( 'auth_logout' === $this->type ) {
-			$this->module = new FABModuleAuthLogout();
-		} elseif ( 'readingbar' === $this->type ) {
-			$this->module = new FABModuleReadingBar();
-		} elseif ( 'scrolltotop' === $this->type ) {
-			$this->module = new FABModuleScrollToTop();
-		} elseif ( 'search' === $this->type ) {
-			$this->module = new FABModuleSearch();
-		}
+
 	}
 
 	/** Grab Nested Attributes */
 	public function construct_nestedAttributes() {
 		/** Size */
 		$this->size = array(
-			'type'   => ( $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['size_type']['meta_key'], true ) ) ?
-				$this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['size_type']['meta_key'], true ) : 'medium',
-			'custom' => ( $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['size_custom']['meta_key'], true ) ) ?
-				$this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['size_custom']['meta_key'], true ) : '',
+			'type'   => ( $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['size_type']['meta_key'], true ) ) ?
+				$this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['size_type']['meta_key'], true ) : 'medium',
+			'custom' => ( $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['size_custom']['meta_key'], true ) ) ?
+				$this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['size_custom']['meta_key'], true ) : '',
 		);
 
 		/** Animation */
-		$default         = FABMetaboxDesign::$input['fab_design_animation']['default'];
-		$this->animation = $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['animation']['meta_key'], true );
+		$default         = SimplePopupMetaboxDesign::$input['fab_design_animation']['default'];
+		$this->animation = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['animation']['meta_key'], true );
 		$this->animation = ( $this->animation ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $this->animation ) : $default;
 
 		/** Responsive */
-		$default          = FABMetaboxDesign::$input['fab_design_responsive']['default'];
-		$this->responsive = $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['responsive']['meta_key'], true );
+		$default          = SimplePopupMetaboxDesign::$input['fab_design_responsive']['default'];
+		$this->responsive = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['responsive']['meta_key'], true );
 		$this->responsive = ( $this->responsive ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $this->responsive ) : $default;
 
 		/** Standalone */
 		$standalone       = [ 'readingbar', 'scrolltotop' ];
 		$this->standalone = ( in_array( $this->type, $standalone ) ) ? true : false;
-		$this->standalone = ( $this->standalone === false ) ? $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['standalone']['meta_key'], true ) : $this->standalone;
+		$this->standalone = ( $this->standalone === false ) ? $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['standalone']['meta_key'], true ) : $this->standalone;
 
 		/** Trigger */
-		$default       = FABMetaboxTrigger::$input['fab_trigger']['default'];
-		$this->trigger = $this->WP->get_post_meta( $this->ID, FABMetaboxTrigger::$post_metas['trigger']['meta_key'], true );
+		$default       = SimplePopupMetaboxDesign::$input['fab_trigger']['default'];
+		$this->trigger = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['trigger']['meta_key'], true );
 		$this->trigger = ( $this->trigger ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $this->trigger ) : $default;
 
 		/** Template */
-		$default        = FABMetaboxDesign::$input['fab_design_template']['default'];
-		$this->template = $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['template']['meta_key'], true );
+		$default        = SimplePopupMetaboxDesign::$input['fab_design_template']['default'];
+		$this->template = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['template']['meta_key'], true );
 		$this->template = ( $this->template ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $this->template ) : $default;
 
 		/** Tooltip */
-		$default       = FABMetaboxDesign::$input['fab_design_tooltip']['default'];
-		$this->tooltip = $this->WP->get_post_meta( $this->ID, FABMetaboxDesign::$post_metas['tooltip']['meta_key'], true );
+		$default       = SimplePopupMetaboxDesign::$input['fab_design_tooltip']['default'];
+		$this->tooltip = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['tooltip']['meta_key'], true );
 		$this->tooltip = ( $this->tooltip ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $this->tooltip ) : $default;
 
 		/** Location */
-		$this->locations = $this->WP->get_post_meta( $this->ID, FABMetaboxLocation::$post_metas['locations']['meta_key'], true );
+		$this->locations = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['locations']['meta_key'], true );
 		$this->locations = ( $this->locations ) ? json_decode( $this->locations, true ) : array();
 	}
 
 	/** Grab Link */
 	public function construct_grabLink() {
 		if ( $this->type === 'link' || $this->type === 'anchor_link' ) {
-			$this->link         = $this->WP->get_post_meta( $this->ID, FABMetaboxSetting::$post_metas['link']['meta_key'], true );
+			$this->link         = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxSetting::$post_metas['link']['meta_key'], true );
 			$this->link         = ( $this->link && is_string( $this->link ) ) ? $this->link : '';
-			$this->linkBehavior = $this->WP->get_post_meta( $this->ID, FABMetaboxSetting::$post_metas['link_behavior']['meta_key'], true );
+			$this->linkBehavior = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxSetting::$post_metas['link_behavior']['meta_key'], true );
 		} elseif ( $this->type === 'auth_logout' ) {
 			$this->link = wp_logout_url( home_url() );
 		} elseif ( $this->type === 'latest_post_link' ) {
@@ -282,7 +253,7 @@ class SimplePopupItem {
 	public function construct_extraOptions() {
 		if ( $this->type === 'print' ) {
 			$this->extraOptions['print'] = array(
-				'target' => $this->WP->get_post_meta( $this->ID, FABMetaboxSetting::$post_metas['print_target']['meta_key'], true ),
+				'target' => $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxSetting::$post_metas['print_target']['meta_key'], true ),
 			);
 		}
 	}
@@ -430,7 +401,7 @@ class SimplePopupItem {
 		}
 
 		/** Output the content */
-		View::RenderStatic(
+		View::render(
 			sprintf( 'Template/modal/layout/%s',
 				isset( $this->getModal()->getLayout()['id'] ) ?
 					$this->getModal()->getLayout()['id'] : 'stacked'
@@ -509,7 +480,7 @@ class SimplePopupItem {
 		/** TODO: OLDCODE must be removed next major version */
 		$oldData = $this->WP->get_post_meta( $this->ID, 'fab_setting_icon_class', true );
 		if ( $oldData ) {
-			$this->WP->update_post_meta( $this->ID, FABMetaboxDesign::$post_metas['icon_class']['meta_key'], $oldData );
+			$this->WP->update_post_meta( $this->ID, SimplePopupMetaboxDsign::$post_metas['icon_class']['meta_key'], $oldData );
 		}
 
 		/** TODO: OLDCODE must be removed next major version */
@@ -637,28 +608,14 @@ class SimplePopupItem {
 	}
 
 	/**
-	 * @return FABModal
-	 */
-	public function getModal(): FABModal {
-		return $this->modal;
-	}
-
-	/**
-	 * @param FABModal $modal
-	 */
-	public function setModal( FABModal $modal ): void {
-		$this->modal = $modal;
-	}
-
-	/**
-	 * @return FABModule
+	 * @return SimplePopupModule
 	 */
 	public function getModule() {
 		return $this->module;
 	}
 
 	/**
-	 * @param FABModule $module
+	 * @param SimplePopupModule $module
 	 */
 	public function setModule( $module ): void {
 		$this->module = $module;
@@ -765,7 +722,7 @@ class SimplePopupItem {
 	/** Grab All Assigned Variables */
 	public function getVars() {
 		$data          = get_object_vars( $this );
-		$data['modal'] = $this->modal->getVars();
+
 		if ( $this->module ) {
 			$data['module'] = $this->module->getVars();
 		}

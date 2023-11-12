@@ -283,7 +283,7 @@ class Plugin
 	}
 
 	/**
-	 * Get FAB Modules
+	 * Get SimplePopup Modules
 	 */
 	public function getModules()
 	{
@@ -291,7 +291,7 @@ class Plugin
 		$allow = ['.', '..', '.DS_Store', 'index.php'];
 		foreach (
 			$this->Helper->getDirFiles(
-				$this->path['framework_path'] . 'src/Helper/FABModule'
+				$this->path['framework_path'] . 'src/Helper/SimplePopupModule'
 			)
 			as $module
 		) {
@@ -326,7 +326,7 @@ class Plugin
 			$name = basename($controller, '.php');
 
 			// Modified to get dynamic namespace level
-			// Because psr-4 failed to generate auto class (ex:Metabox)
+			// Because psr-4 fa1iled to generate auto class (ex:Metabox)
 			// TODO: Must more dynamic (how if inside folder have folder again?)
 			$_dir = basename(dirname($controller));
 			if($_dir == 'Controller'){

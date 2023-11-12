@@ -28,13 +28,20 @@ class SimplePopup extends Model {
 		/** Create a post type */
 		parent::__construct( $plugin );
 
-        $this->args['labels'] = ['name' => $plugin->getName()];
+        $this->args['labels'] = [
+			'name' => $plugin->getName(),
+	        'add_new_item' => __( "Add ".$plugin->getName() ),
+			'add_new' => __( "Add ".$plugin->getName() ),
+        ];
 		$this->args['public'] = true;
 		$this->args['publicly_queryable'] = true; /** Needed to enable Elementor */
 		$this->args['menu_icon'] = 'dashicons-welcome-widgets-menus';
 		$this->args['has_archive'] = false;
 		$this->args['show_in_rest'] = true;
-        $this->args['supports'] = array('title', 'editor', 'thumbnail');
+        $this->args['supports'] = array('title','editor');
+		// Disable Gutenberg editor
+		// TODO: the location is must not to be here
+		add_filter('use_block_editor_for_post', '__return_false', 10);
 
 		/** @backend */
 		$action = new Action();
@@ -46,11 +53,11 @@ class SimplePopup extends Model {
 		$this->hooks[] = $action;
 
 		/** @backend */
-		$action = clone $action;
-		$action->setHook( 'template_redirect' );
-		$action->setCallback( 'redirect_public_access' );
-		$action->setDescription( 'Redirect SIP Post Type Public Access' );
-		$this->hooks[] = $action;
+//		$action = clone $action;
+//		$action->setHook( 'template_redirect' );
+//		$action->setCallback( 'redirect_public_access' );
+//		$action->setDescription( 'Redirect SIP Post Type Public Access' );
+//		$this->hooks[] = $action;
 	}
 
 	/**
@@ -66,39 +73,39 @@ class SimplePopup extends Model {
 			return;
 		}
 
-		/** Save Metabox Setting */
-		if ( $this->checkInput( FABMetaboxSetting::$input ) ) {
-			$metabox = new FABMetaboxSetting();
-			$metabox->sanitize();
-			$metabox->setDefaultInput();
-			$metabox->save();
-		}
-
-		/** Save Metabox Design */
-		if ( $this->checkInput( FABMetaboxDesign::$input ) ) {
-			$metabox = new FABMetaboxDesign();
-			$metabox->sanitize();
-			$metabox->setDefaultInput();
-			$metabox->save();
-		}
-
-		/** Save Metabox Location */
-		if ( $this->checkInput( FABMetaboxLocation::$input ) ) {
-			$metabox = new FABMetaboxLocation();
-			$metabox->sanitize();
-			$metabox->setDefaultInput();
-			$metabox->save();
-		} else {
-			$this->WP->delete_post_meta( $post->ID, FABMetaboxLocation::$post_metas['locations']['meta_key'] );
-		}
-
-		/** Save Metabox Trigger */
-		if ( $this->checkInput( FABMetaboxTrigger::$input ) ) {
-			$metabox = new FABMetaboxTrigger();
-			$metabox->sanitize();
-			$metabox->setDefaultInput();
-			$metabox->save();
-		}
+//		/** Save Metabox Setting */
+//		if ( $this->checkInput( FABMetaboxSetting::$input ) ) {
+//			$metabox = new FABMetaboxSetting();
+//			$metabox->sanitize();
+//			$metabox->setDefaultInput();
+//			$metabox->save();
+//		}
+//
+//		/** Save Metabox Design */
+//		if ( $this->checkInput( FABMetaboxDesign::$input ) ) {
+//			$metabox = new FABMetaboxDesign();
+//			$metabox->sanitize();
+//			$metabox->setDefaultInput();
+//			$metabox->save();
+//		}
+//
+//		/** Save Metabox Location */
+//		if ( $this->checkInput( FABMetaboxLocation::$input ) ) {
+//			$metabox = new FABMetaboxLocation();
+//			$metabox->sanitize();
+//			$metabox->setDefaultInput();
+//			$metabox->save();
+//		} else {
+//			$this->WP->delete_post_meta( $post->ID, FABMetaboxLocation::$post_metas['locations']['meta_key'] );
+//		}
+//
+//		/** Save Metabox Trigger */
+//		if ( $this->checkInput( FABMetaboxTrigger::$input ) ) {
+//			$metabox = new FABMetaboxTrigger();
+//			$metabox->sanitize();
+//			$metabox->setDefaultInput();
+//			$metabox->save();
+//		}
 	}
 
 	/**

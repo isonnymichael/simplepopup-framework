@@ -39,6 +39,14 @@ class Backend extends Controller
 		$action->setMandatory(true);
 		$action->setDescription(__('Enqueue scripts in backend', 'simplepopup'));
 		$this->hooks[] = $action;
+
+		// Custom post page
+		/** @backend */
+		$action = clone $action;
+		$action->setHook( 'enter_title_here' );
+		$action->setCallback( 'backend_custom_label' );
+		$action->setDescription( 'Custom label backend post' );
+		$this->hooks[] = $action;
 	}
 
 	/**
@@ -65,7 +73,7 @@ class Backend extends Controller
 		if (
 			in_array($screen->base, $screens) ||
 			(isset($post->post_type) &&
-				$post->post_type === 'movie' &&
+				$post->post_type === 'simplepopup' &&
 				in_array($screen->pagenow, $allowedPage))
 		) {
 			// Load Core Vendors.
@@ -87,5 +95,32 @@ class Backend extends Controller
 				true
 			);
 		}
+
+	}
+
+	/**
+	 * @return void
+	 * Custom Label backend Title and Placeholder
+	 */
+	public function backend_custom_label()
+	{
+		global $post;
+		$screen = $this->WP->getScreen();
+		$screen->base = str_replace(' ', '-', $screen->base);
+		$slug = sprintf('%s-setting', $this->Framework->getSlug());
+		$screens = [sprintf('settings_page_%s', $slug)];
+		$allowedPage = ['post.php', 'post-new.php'];
+		$title = "";
+		// Load Vendors.
+		if (
+			in_array($screen->base, $screens) ||
+			(isset($post->post_type) &&
+			 $post->post_type === 'simplepopup' &&
+			 in_array($screen->pagenow, $allowedPage))
+		) {
+			$title = 'Enter '.$this->Framework->getName().' Title';
+		}
+
+		return $title;
 	}
 }
