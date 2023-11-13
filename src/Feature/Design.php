@@ -14,7 +14,72 @@ use SimplePopup\Feature;
  */
 
 class Design extends Feature {
-	/** SimplePopup Default Size Type */
+	/** SimplePopup Trigger */
+	public static $trigger = array(
+		'trigger' => '0'
+	);
+
+	/** SimplePopup  Targeting */
+	public static $targeting = array(
+		'type' => array(
+			array(
+				'id' => 'home',
+				'text' => 'Homepage'
+			),
+			array(
+				'id' => 'search',
+				'text' => 'Search Result'
+			),
+			array(
+				'id' => 'error',
+				'text' => '404 Error Page'
+			),
+			array(
+				'id' => 'all_post',
+				'text' => 'All Posts'
+			),
+			array(
+				'id' => 'post_id',
+				'text' => 'Post: Selected'
+			),
+			array(
+				'id' => 'all_page',
+				'text' => 'All Pages'
+			),
+			array(
+				'id' => 'page_id',
+				'text' => 'Page: Selected'
+			),
+		)
+	);
+
+	/** SimplePopup Display */
+	public static $display = array(
+		'position' => array(
+			array(
+				'id'   => 'left_bottom',
+				'text' => 'Left Bottom',
+			),
+			array(
+				'id'   => 'left_top',
+				'text' => 'Left Top',
+			),
+			array(
+				'id'   => 'center',
+				'text' => 'Center',
+			),
+			array(
+				'id'   => 'right_bottom',
+				'text' => 'Right Bottom',
+			),
+			array(
+				'id'   => 'right_top',
+				'text' => 'Right Top',
+			),
+		)
+	);
+
+	/** SimplePopup Size Type */
 	public static $size = array(
 		'type' => array(
             array(

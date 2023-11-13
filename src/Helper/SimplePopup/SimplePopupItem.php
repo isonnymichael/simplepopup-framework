@@ -49,10 +49,28 @@ class SimplePopupItem {
 	protected $content;
 
 	/**
-	 * @access   protected
-	 * @var      array    $size    design
+	 * @access protected
+	 * @var string $trigger
 	 */
-	protected $size = array();
+	protected $trigger;
+
+	/**
+	 * @access protected
+	 * @var array $targeting
+	 */
+	protected $targeting = array();
+
+	/**
+	 * @access   protected
+	 * @var string  $size
+	 */
+	protected $size;
+
+	/**
+	 * @access   protected
+	 * @var string  display
+	 */
+	protected $display;
 
 	public function __construct( int $ID ) {
 		/** Get Plugin Instance */
@@ -69,13 +87,14 @@ class SimplePopupItem {
 		$this->status          = get_post_field( 'post_status', $this->ID );
 		$this->content         = get_post_field('post_content', $this->ID);
 
-		/** Size */
+		/** Get Meta Post */
 		$default = SimplePopupMetaboxDesign::$input['simplepopup_settings']['default'];
-		$this->size = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['simplepopup_settings']['meta_key'], true );
-		$this->size = ( $this->size ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $this->size ) : $default;
-		$this->size = $this->size['size_type'];
-
-
+		$meta = $this->WP->get_post_meta( $this->ID, SimplePopupMetaboxDesign::$post_metas['simplepopup_settings']['meta_key'], true );
+		$meta = ( $meta ) ? $this->Helper->ArrayMergeRecursive( (array) $default, (array) $meta ) : $default;
+		$this->trigger = $meta['trigger'];
+		$this->targeting = $meta['targeting'];
+		$this->size = $meta['size_type'];
+		$this->display = $meta['display'];
 	}
 
 	/**
@@ -149,16 +168,44 @@ class SimplePopupItem {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getTrigger(): string {
+		return $this->trigger;
+	}
+
+	/**
+	 * @param string $trigger
+	 */
+	public function setTrigger( $trigger ): void {
+		$this->trigger = $trigger;
+	}
+
+	/**
 	 * @return array
 	 */
-	public function getSize(): array {
+	public function getTargeting(): array {
+		return $this->targeting;
+	}
+
+	/**
+	 * @param array $targeting
+	 */
+	public function setTargeting( array $targeting ): void {
+		$this->targeting = $targeting;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSize(): string {
 		return $this->size;
 	}
 
 	/**
-	 * @param array $size
+	 * @param string $size
 	 */
-	public function setSize( array $size ): void {
+	public function setSize( $size ): void {
 		$this->size = $size;
 	}
 

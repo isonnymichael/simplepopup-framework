@@ -77,6 +77,9 @@ class MetaboxDesign extends Base {
         /** Add Inline Script */
         $this->WP->wp_localize_script( 'simplepopup-local', 'SIMPLEPOPUP_METABOX_DESIGN', array(
             'defaultOptions' => [
+				'trigger' => Design::$trigger['trigger'],
+				'targeting' => array('type' => Design::$targeting['type']),
+				'display' => array('type' => Design::$display['position']),
                 'size' => array( 'type' => Design::$size['type'] )
             ],
             'data' => compact('simplepopup')

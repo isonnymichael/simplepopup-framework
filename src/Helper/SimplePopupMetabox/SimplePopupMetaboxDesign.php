@@ -19,8 +19,13 @@ class SimplePopupMetaboxDesign extends Metabox {
 	public static $input = array(
         'simplepopup_settings'   => array(
 	        'default' => array(
-		        'size_type' => '',
-				'other' => ''
+				'trigger' => '0',
+				'targeting' => array(
+					'target' => 'home',
+					'value' => 'home' // value for custom post id, or pages
+				),
+		        'size_type' => 'medium',
+		        'display' => 'center'
 	        ),
         ), // Size.
 	);
