@@ -34,6 +34,8 @@ class BackendPage extends Controller
 		parent::__construct($framework);
 
 		// Admin Menu Setting @backend.
+		// TODO : Noo need setting page for now
+		/*
 		$action = new Action();
 		$action->setComponent($this);
 		$action->setHook('admin_menu');
@@ -45,6 +47,7 @@ class BackendPage extends Controller
 			__('Add custom admin page under settings in backend', 'simplepopup')
 		);
 		$this->hooks[] = $action;
+		*/
 	}
 
 	/**
