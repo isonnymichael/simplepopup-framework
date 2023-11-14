@@ -131,11 +131,17 @@ class SimplePopupItem {
 
 		// Match Targeting
 		if(isset( $post->ID ) && is_singular() && ($this->targeting['target'] == 'page_id' || $this->targeting['target'] == 'post_id')){ // Matched by ID, single
-			$to_be_displayed = $this->match_operator_and_value(
-				$equal,
-				$post->ID, // Source Value, Current Post ID.
-				$this->targeting['value'] // Compared Value, Page ID.
-			);
+
+			$posts = explode(",", $this->targeting['value']);
+			$posts = array_filter($posts);
+
+			foreach ($posts as $p ){
+				$to_be_displayed = $this->match_operator_and_value(
+					$equal,
+					$post->ID, // Source Value, Current Post ID.
+					intval($p) // Compared Value, Page ID.
+				);
+			}
 		} else if(is_home() && $this->targeting['target'] == 'homepage'){
 			$to_be_displayed = true;
 		}else if(is_404() && $this->targeting['target'] == '404_error'){
