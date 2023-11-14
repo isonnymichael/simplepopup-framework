@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name:       Simple Popup
- * Plugin URI:        https://example.com/plugins/the-basics/
+ * Plugin URI:        https://github.com/isonnymichael/simplepopup-framework
  * Description:       A simple lightweight popup, fast, and powerful. Create anything on text editor, and woolaaa.. your popup is captivating audiences effortlessly
  * Version:           0.0.1
  * Requires at least: 6.4
