@@ -9,8 +9,8 @@ use SimplePopup\Controller;
 /**
  * Initiate plugins
  *
- * @package    Fab
- * @subpackage Fab\Includes
+ * @package    SimplePopup
+ * @subpackage SimplePopup\Includes
  */
 
 class Feature extends Controller {
@@ -51,6 +51,13 @@ class Feature extends Controller {
 	protected $params;
 
 	/**
+	 * Form
+	 *
+	 * @var     object
+	 */
+	protected  $Form;
+
+	/**
 	 * Feature construect
 	 *
 	 * @return void
@@ -58,11 +65,11 @@ class Feature extends Controller {
 	 * @pattern prototype
 	 */
 	public function __construct() {
-		parent::__construct(\Fab\Plugin::getInstance());
+		parent::__construct(\SimplePopup\Plugin::getInstance());
 		$this->options            = (object) array();
 		$this->params             = (object) array();
 		$this->hide_on_production = false;
-		$this->Form               = $this->Plugin->getForm();
+		$this->Form               = $this->Framework->getForm();
 	}
 
 	/** Generate Options HTML in Backend */

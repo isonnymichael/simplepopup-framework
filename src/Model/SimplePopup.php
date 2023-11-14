@@ -29,7 +29,6 @@ class SimplePopup extends Model {
 	public function __construct( \SimplePopup\Plugin $plugin ) {
 		/** Create a post type */
 		parent::__construct( $plugin );
-
         $this->args['labels'] = [
 			'name' => $plugin->getName(),
 	        'add_new_item' => __( "Add ".$plugin->getName() ),

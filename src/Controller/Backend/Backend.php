@@ -7,6 +7,7 @@ namespace SimplePopup\Controller\Backend;
 // Plugin class import.
 use SimplePopup\Controller;
 use SimplePopup\WordPress\Hook\Action;
+use SimplePopup\WordPress\Hook\Filter;
 
 /**
  * Backend
@@ -47,6 +48,7 @@ class Backend extends Controller
 		$action->setCallback( 'backend_custom_label' );
 		$action->setDescription( 'Custom label backend post' );
 		$this->hooks[] = $action;
+
 	}
 
 	/**

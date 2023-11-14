@@ -324,7 +324,6 @@ class Plugin
 				continue;
 			}
 			$name = basename($controller, '.php');
-
 			// Modified to get dynamic namespace level
 			// Because psr-4 fa1iled to generate auto class (ex:Metabox)
 			// TODO: Must more dynamic (how if inside folder have folder again?)
@@ -333,6 +332,10 @@ class Plugin
 				$controller = '\\SimplePopup\\' . ucwords($dir) . '\\' . $name;
 			}else{
 				$controller = '\\SimplePopup\\' . ucwords($dir) . '\\' . ucwords($_dir) . '\\' . $name;
+			}
+			// I made folder Api inside src
+			if ($_dir === 'Api') {
+				$controller = '\\SimplePopup\\' . ucwords($dir) . '\\' . $name;
 			}
 
 			$controller = new $controller($this);
