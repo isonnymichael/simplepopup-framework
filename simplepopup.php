@@ -7,10 +7,10 @@
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            Sonny Michael
- * Author URI:        https://github.com/isonnymichael/simplepopup-framework
+ * Author URI:        https://github.com/isonnymichael
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:        https://example.com/my-plugin/
+ * Update URI:        https://github.com/isonnymichael/simplepopup-framework
  * Text Domain:       simple-popup-plugin
  * Domain Path:       /languages
  */
