@@ -1,17 +1,17 @@
-<!-- The Modal -->
+
 <?php foreach ( $simplepopup_to_display as $item ) : ?>
 
-<div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div style="display:flex;justify-content: space-between">
-            <h3 style="margin: 0px"><?php echo esc_attr( $item->getTitle() ); ?></h3>
-            <span class="close">&times;</span>
-        </div>
-        <div>
-			<?php echo  $item->getContent(); ?>
-        </div>
-    </div>
-
+<div id="simplepopup-<?php echo $item->getID() ?>" class="simplepopup <?php echo 'simplepopup-'.$item->getDisplay() ?>">
+	<div class="simplepopup-wrapper <?php echo esc_attr( $item->getSize() ); ?>">
+		<div class="simplepopup-header">
+			<h3><?php echo esc_attr( $item->getTitle() ); ?></h3>
+			<span class="close simplepopup-close-<?php echo $item->getID() ?>">&times;</span>
+		</div>
+		<div class="simplepopup-content-wrapper">
+			<div class="simplepopup-content">
+				<?php echo  $item->getContent(); ?>
+			</div>
+		</div>
+	</div>
 </div>
 <?php endforeach; ?>

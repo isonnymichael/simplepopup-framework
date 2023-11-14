@@ -103,15 +103,6 @@ class Frontend extends Controller {
 			true
 		);
 
-		/** Load Plugin Components */
-//		$components = ['simplepopup'];
-//		foreach($simplepopup_to_display as $component){
-//			var_dump($component);
-//			die();
-//			$this->WP->wp_enqueue_style( sprintf('fab-%s-component', $component), sprintf('build/components/%s/bundle.css', $component) );
-//			$this->WP->wp_enqueue_script(sprintf('fab-%s-component', $component), sprintf('build/components/%s/bundle.js', $component), array(), '1.0', true);
-//		}
-
 	}
 
 	/**

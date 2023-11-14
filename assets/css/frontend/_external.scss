@@ -1,38 +1,143 @@
 /* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
+.simplepopup {
+	visibility: hidden;
 	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
-	left: 0;
-	top: 0;
+	z-index: 999999; /* Sit on top */
 	width: 100%; /* Full width */
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgb(0,0,0); /* Fallback color */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	opacity: 0; // Default opacity
+	transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; /* Animation fade in and fadeout */
+
+	/* Animation */
+	&.fade {
+		visibility: visible;
+		opacity: 1;
+	}
+	/* End of Animation */
+
+	/* Size Modal */
+	&-wrapper {
+		width: 100%;
+
+		&.xsmall{
+			max-width: 366px;
+		}
+		&.small{
+			max-width: 576px;
+		}
+		&.medium{
+			max-width: 768px;
+		}
+		&.large{
+			max-width: 992px;
+		}
+		&.xlarge{
+			max-width: 1200px;
+		}
+	}
+
+	/*	Enf of Size Modal */
+
+	/* Position Modal */
+	&-right_bottom{
+		right: 0;
+		bottom: 0;
+
+		display: flex;
+		align-items: end; // bottom
+		justify-content: end; // right
+	}
+	&-left_bottom{
+		left: 0;
+		bottom: 0;
+
+		display: flex;
+		align-items: end; // bottom
+		justify-content: start; // left
+	}
+	&-right_top{
+		right: 0;
+		top: 0;
+
+		display: flex;
+		align-items: start; // top
+		justify-content: end; // right
+	}
+	&-left_top{
+		left: 0;
+		top: 0;
+
+		display: flex;
+		align-items: start; // top
+		justify-content: start; // left
+	}
+	&-center{
+		left: 0;
+		top: 0;
+
+		display: flex;
+		align-items: center; // center
+		justify-content: center; // center
+	}
+	/* End of Position Modal */
+
 }
 
-/* Modal Content */
-.modal-content {
+/* Modal Header */
+.simplepopup-header {
+	position: relative;
 	background-color: #fefefe;
 	margin: auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 80%;
-}
+	width: 100%;
+	border-radius: 8px 8px 0px 0px;
+	padding-bottom: 0px;
 
-/* The Close Button */
+	h3{
+		text-align: center;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-top: 12px;
+		margin-right: 20px;
+		margin-left: 20px;
+	}
+}
+/* End of Modal Header */
+
+/* Modal Content */
+.simplepopup-content-wrapper {
+	background-color: #fefefe;
+	margin: auto;
+	width: 100%;
+	border-radius: 0px 0px 8px 8px;
+	padding: 12px 0px;
+	.aligncenter {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.simplepopup-content{
+		padding: 0px 20px;
+	}
+}
+/* End of Modal Content */
+
+/* Close Button */
 .close {
 	color: #aaaaaa;
 	float: right;
 	font-size: 28px;
 	font-weight: bold;
+	position: absolute;
+	right: 8px;
+	top: -8px;
 }
-
 .close:hover,
 .close:focus {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
 }
+/* End of Close Button */

@@ -298,6 +298,20 @@ class SimplePopupItem {
 	/**
 	 * @return string
 	 */
+	public function getDisplay(): string {
+		return $this->display;
+	}
+
+	/**
+	 * @param string $display
+	 */
+	public function setDisplay( $display ): void {
+		$this->$display = $display;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getSize(): string {
 		return $this->size;
 	}
