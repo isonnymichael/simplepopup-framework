@@ -39,10 +39,12 @@ class Frontend extends Controller {
 		$action->setDescription( __( 'Enqueue scripts in frontend', 'simplepopup' ) );
 		$this->hooks[] = $action;
 
+		/** @frontend */
 		$action = clone $action;
 		$action->setHook( 'wp_footer' );
-		$action->setCallback( 'modal_dom' );
-		$action->setDescription( __( 'Enqueue scripts in frontend', 'simplepopup' ) );
+		$action->setCallback( 'simplepopup_loader' );
+		$action->setDescription( 'Display the html element from view Frontend' );
+		$action->setPriority( 10 );
 		$this->hooks[] = $action;
 	}
 
@@ -54,6 +56,39 @@ class Frontend extends Controller {
 	 *
 	 */
 	public function frontend_enqueue() {
+		/** Default Variables */
+		define( 'SIMPLEPOPUP_SCREEN', json_encode( $this->WP->getScreen() ) );
+		$default = $this->Framework->getConfig()->default;
+		$config  = $this->Framework->getConfig()->options;
+		$options = (object) ( $this->Helper->ArrayMergeRecursive( (array) $default, (array) $config ) );
+
+		/** Get SimplePopup for JS Manipulation */
+		$simplepopup_to_display = $this->Framework->getModels()['SimplePopup'];
+		$simplepopup_to_display = $simplepopup_to_display->get_lists_of_simplepopup( array(
+			'validateLocation' => true
+		) )['items'];
+		foreach($simplepopup_to_display as &$simplepopup){
+			$simplepopup = $simplepopup->getVars();
+		}
+
+		/** Load Inline Script */
+		$this->WP->wp_enqueue_script( 'simplepopup-local', 'local/simplepopup.js', array(), '', true );
+		$this->WP->wp_localize_script(
+			'simplepopup-local',
+			'SIMPLEPOPUP_PLUGIN',
+			array(
+				'name'    => SIMPLEPOPUP_NAME,
+				'version' => SIMPLEPOPUP_VERSION,
+				'screen'  => SIMPLEPOPUP_SCREEN,
+				'path'    => SIMPLEPOPUP_PATH,
+				'rest_url'=> esc_url_raw( rest_url() ),
+				'options' => $options,
+				'to_display' => $simplepopup_to_display
+			)
+		);
+
+		/** Load WP Core jQuery */
+		wp_enqueue_script( 'jquery' );
 
 		// Load Plugin Assets.
 		$this->WP->wp_enqueue_style(
@@ -67,24 +102,47 @@ class Frontend extends Controller {
 			'0.0.1',
 			true
 		);
+
+		/** Load Plugin Components */
+//		$components = ['simplepopup'];
+//		foreach($simplepopup_to_display as $component){
+//			var_dump($component);
+//			die();
+//			$this->WP->wp_enqueue_style( sprintf('fab-%s-component', $component), sprintf('build/components/%s/bundle.css', $component) );
+//			$this->WP->wp_enqueue_script(sprintf('fab-%s-component', $component), sprintf('build/components/%s/bundle.js', $component), array(), '1.0', true);
+//		}
+
 	}
 
 	/**
-	 * Modal DOM
+	 * Display the html element from view Frontend
 	 *
 	 * @return  void
 	 */
-	public function modal_dom(){
+	public function simplepopup_loader() {
+		global $post;
 
-		// Sections
-		$sections = array();
-		$sections['Frontend.modal-component'] = array();
+		/** Ignore in Pages */
+		if ( is_singular() && isset( $post->post_type ) && $post->post_type === 'simplepopup' ) {
+			return;
+		}
 
-		// Load view.
-		$view = new View( $this->Framework );
-		$view->setTemplate( 'frontend.blank' );
-		$view->setSections( $sections );
-		$view->setOptions( array( 'shortcode' => true ) );
-		$view->build();
+		/** Grab Data */
+		$SimplePopup = $this->Framework->getModels()['SimplePopup'];
+		$args = array(
+			'validateLocation' => true,
+		);
+		$lists = $SimplePopup->get_lists_of_simplepopup( $args );
+		$simplepopup_to_display = $lists['items'];
+
+		/** Show Modal - Only Default */
+		if ( ! is_admin() && ( $simplepopup_to_display ) ) {
+			$args['builder'] = array( 'default' );
+			$simplepopup_to_display  = $SimplePopup->get_lists_of_simplepopup( $args )['items'];
+
+			View::render('Frontend.popup',
+				compact( 'post', 'simplepopup_to_display' )
+			);
+		}
 	}
 }

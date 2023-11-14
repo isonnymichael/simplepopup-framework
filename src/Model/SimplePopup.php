@@ -10,6 +10,7 @@ namespace SimplePopup\Model;
 
 ! defined( 'WPINC ' ) || die;
 
+use SimplePopup\Helper\SimplePopup\SimplePopupItem;
 use SimplePopup\Helper\SimplePopupMetabox\SimplePopupMetaboxDesign;
 use SimplePopup\Model;
 use SimplePopup\Wordpress\Hook\Action;
@@ -33,6 +34,7 @@ class SimplePopup extends Model {
 			'name' => $plugin->getName(),
 	        'add_new_item' => __( "Add ".$plugin->getName() ),
 			'add_new' => __( "Add ".$plugin->getName() ),
+			'edit_item' => __( "Edit ".$plugin->getName() ),
         ];
 		$this->args['public'] = true;
 		$this->args['publicly_queryable'] = true; /** Needed to enable Elementor */
@@ -53,6 +55,57 @@ class SimplePopup extends Model {
 		$action->setDescription( 'Save SIB Metabox Data' );
 		$this->hooks[] = $action;
 
+	}
+
+	/**
+	 * Return simplepopups item and simplepopups order
+	 *
+	 * @param array $args   Arguments.
+	 * @return array
+	 */
+	public function get_lists_of_simplepopup( $args = array() ) {
+
+		/** Grab Data */
+		$items = get_posts(
+			array(
+				'posts_per_page' => -1,
+				'post_type'      => $this->getName(),
+				'post_status'    => array( 'publish' ),
+				'post__not_in'   => empty( $fab_order ) ?
+					array( 'empty' ) : $fab_order,
+				'orderby'        => 'post_date',
+				'order'          => 'DESC',
+			)
+		);
+
+
+		$tmp = array();
+		foreach ( $items as &$item ) {
+			/** Data Validation */
+			if ( ! isset( $item->ID ) ) { continue; }
+
+			/** SimplePopup Item */
+			$item = new SimplePopupItem( $item->ID ); // Grab FAB Item.
+
+			/** SimplePopup Item Args Validation */
+			if ( $item->getStatus() !== 'publish' ) { continue; }
+
+			/** SimplePopup Item Location */
+			if ( isset( $args['validateLocation'] ) &&
+			     ! empty( $item->getTargeting() ) &&
+			     ! $item->isToBeDisplayed()
+			) {
+				continue; // Check location rules.
+			}
+
+			$tmp[] = $item;
+		}
+		unset( $item );
+		$items = $tmp;
+
+		return array(
+			'items' => $items,
+		);
 	}
 
 	/**

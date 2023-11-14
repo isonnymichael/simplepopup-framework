@@ -24,6 +24,7 @@ class SimplePopupMetaboxDesign extends Metabox {
 					'target' => 'home',
 					'value' => 'home' // value for custom post id, or pages
 				),
+				'session' => 'all',
 		        'size_type' => 'medium',
 		        'display' => 'center'
 	        ),

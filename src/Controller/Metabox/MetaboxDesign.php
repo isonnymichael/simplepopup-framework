@@ -79,6 +79,7 @@ class MetaboxDesign extends Base {
             'defaultOptions' => [
 				'trigger' => Design::$trigger['trigger'],
 				'targeting' => array('type' => Design::$targeting['type']),
+				'session' => array('type' => Design::$session['session']),
 				'display' => array('type' => Design::$display['position']),
                 'size' => array( 'type' => Design::$size['type'] )
             ],

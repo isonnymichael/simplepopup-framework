@@ -23,19 +23,19 @@ class Design extends Feature {
 	public static $targeting = array(
 		'type' => array(
 			array(
-				'id' => 'home',
+				'id' => 'homepage',
 				'text' => 'Homepage'
 			),
 			array(
-				'id' => 'search',
+				'id' => 'search_result',
 				'text' => 'Search Result'
 			),
 			array(
-				'id' => 'error',
+				'id' => '404_error',
 				'text' => '404 Error Page'
 			),
 			array(
-				'id' => 'all_post',
+				'id' => 'post',
 				'text' => 'All Posts'
 			),
 			array(
@@ -43,13 +43,31 @@ class Design extends Feature {
 				'text' => 'Post: Selected'
 			),
 			array(
-				'id' => 'all_page',
+				'id' => 'page',
 				'text' => 'All Pages'
 			),
 			array(
 				'id' => 'page_id',
 				'text' => 'Page: Selected'
 			),
+		)
+	);
+
+	/** SimplePopup User Session */
+	public  static $session = array(
+		'session' => array(
+			array(
+				'id' => 'all',
+				'text' => 'All Users'
+			),
+			array(
+				'id' => 'logged_in',
+				'text' => 'Logged In Users'
+			),
+			array(
+				'id' => 'non_users',
+				'text' => 'Non Users Login'
+			)
 		)
 	);
 

@@ -1,17 +1,17 @@
 <!-- The Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-title">
+<?php foreach ( $simplepopup_to_display as $item ) : ?>
 
-    </div>
+<div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
         <div style="display:flex;justify-content: space-between">
-            <h3 style="margin: 0px">Judul</h3>
+            <h3 style="margin: 0px"><?php echo esc_attr( $item->getTitle() ); ?></h3>
             <span class="close">&times;</span>
         </div>
         <div>
-            <p>Konten</p>
+			<?php echo  $item->getContent(); ?>
         </div>
     </div>
 
 </div>
+<?php endforeach; ?>
