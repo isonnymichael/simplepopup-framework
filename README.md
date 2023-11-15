@@ -7,11 +7,10 @@ it empowers developers to create feature-rich and visually appealing solutions e
 Embrace this versatile framework to enhance productivity, ensure code consistency, and deliver exceptional user experiences within the vibrant WordPress ecosystem. Simplify development and elevate your projects with SimplePopup Framework's comprehensive toolset.
 
 <p>
-	<img src="https://img.shields.io/github/last-commit/artistudioxyz/simplepopup-framework" alt="Last Commit">
-	<img src="https://img.shields.io/github/languages/code-size/artistudioxyz/simplepopup-framework" alt="Code Size">
-	<img src="https://img.shields.io/github/v/tag/artistudioxyz/simplepopup-framework" alt="Latest Tag">
-	<img src="https://github.com/artistudioxyz/simplepopup-framework/actions/workflows/workflow.yml/badge.svg" alt="Build Status">
-	<img src="https://img.shields.io/github/stars/artistudioxyz/simplepopup-framework?style=social" alt="Stars">
+	<img src="https://img.shields.io/github/last-commit/isonnymichael/simplepopup-framework" alt="Last Commit">
+	<img src="https://img.shields.io/github/languages/code-size/isonnymichael/simplepopup-framework" alt="Code Size">
+	<img src="https://img.shields.io/github/v/tag/isonnymichael/simplepopup-framework" alt="Latest Tag">
+	<img src="https://img.shields.io/github/stars/isonnymichael/simplepopup-framework?style=social" alt="Stars">
 </p>
 
 ## 🚀 Installation
