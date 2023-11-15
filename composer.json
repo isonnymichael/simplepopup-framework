@@ -1,6 +1,6 @@
 {
     "name": "artistudioxyz/simplepopup-framework",
-    "description": "Just another WordPress Plugin and Theme boilerplate with TailwindCSS, SASS, Blocks, ESLint, Prettier, and more.",
+    "description": "A simple lightweight popup, fast, and powerful WordPress plugin.",
     "license" : "GPL-3.0",
     "autoload": {
       "psr-4": {
@@ -9,8 +9,8 @@
     },
     "authors": [
         {
-            "name": "Agung Sundoro",
-            "email": "muhagung2001@gmail.com"
+            "name": "Sonny Michael Wijaya",
+            "email": "isonnymichael@gmail.com"
         }
     ],
     "require": {}

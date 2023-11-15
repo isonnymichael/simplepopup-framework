@@ -23,6 +23,6 @@ jobs:
       - name: Packagist 🚀️
         uses: mnavarrocarter/packagist-update@v1.0.0
         with:
-          username: "agung2001"
+          username: "isonnymichael"
           api_token: ${{ secrets.packagist_token }}
           domain: "packagist.org"
